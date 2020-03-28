@@ -1,14 +1,16 @@
-package com.example.worker;
+package com.example.worker.Cards;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
+
+import com.bumptech.glide.Glide;
+import com.example.worker.Cards.cards;
+import com.example.worker.R;
 
 import java.util.List;
 
@@ -29,18 +31,17 @@ public class arrayAdapter extends ArrayAdapter<cards> {
         }
 
         TextView name = convertView.findViewById(R.id.name);
-        ImageSwitcher images = convertView.findViewById(R.id.images);
+        ImageView image = convertView.findViewById(R.id.images);
 
         name.setText(card_item.getName());
-        images.setFactory(new ViewSwitcher.ViewFactory() {
-            @Override
-            public View makeView() {
-                ImageView view= new ImageView(getContext());
-                view.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                return view;
-            }
-        });
-        images.setImageResource(R.mipmap.ic_launcher);
+        switch (card_item.getProfileImageURL()){
+            case "default":
+                Glide.with(getContext()).load("https://randomuser.me/api/portraits/med/lego/1.jpg").into(image);
+                break;
+            default:
+                Glide.with(getContext()).load(card_item.getProfileImageURL()).into(image);
+        }
+        Glide.with(getContext()).load(card_item.getProfileImageURL()).into(image);
 
         return convertView;
     }

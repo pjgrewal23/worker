@@ -45,7 +45,7 @@ public class Settings extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference userDb;
 
-    private String uid, name, phone, description, profilepicURL;
+    private String uid, name, phone, description, profilepicURL, userType;
 
     private Uri resultUri;
 
@@ -54,7 +54,6 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        String userType = getIntent().getExtras().getString("userType");
         nameText = findViewById(R.id.name);
         phoneText = findViewById(R.id.phone);
         desText = findViewById(R.id.description);
@@ -67,7 +66,7 @@ public class Settings extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         uid = firebaseAuth.getCurrentUser().getUid();
-        userDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userType).child(uid);
+        userDb = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
         getUserInfo();
 
@@ -106,6 +105,10 @@ public class Settings extends AppCompatActivity {
                     if(map.get("name") != null){
                         name = map.get("name").toString();
                         nameText.setText(name);
+                    }
+                    if(map.get("userType") != null){
+                        userType = map.get("userType").toString();
+                        //nameText.setText(name);
                     }
                     if(map.get("phone") != null){
                         phone = map.get("phone").toString();
@@ -171,7 +174,6 @@ public class Settings extends AppCompatActivity {
 
                     Map userInfo = new HashMap();
                     userInfo.put("profilepicURL", url.toString());
-                    Toast.makeText(Settings.this, "YO", Toast.LENGTH_LONG).show();
                     userDb.updateChildren(userInfo);
 
                     Intent intent = new Intent(Settings.this, MainActivity.class);

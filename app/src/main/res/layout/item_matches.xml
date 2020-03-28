@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="20sp">
+    <ImageView
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:scaleType="centerCrop"
+        android:id="@+id/matchImage"
+        android:src="@mipmap/ic_launcher"
+        android:padding="10sp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Match Name"
+        android:paddingBottom="20sp"
+        android:layout_gravity="center"
+        android:id="@+id/matchId"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Match Phone"
+        android:paddingBottom="20sp"
+        android:layout_gravity="center"
+        android:id="@+id/matchPhone"
+        />
+
+    <TextView
+        android:id="@+id/matchDes"
+        android:layout_width="match_parent"
+        android:paddingBottom="20sp"
+        android:scrollbars="vertical"
+        android:layout_height="86dp"
+        android:layout_gravity="center"
+        android:text="Match Description" />
+</LinearLayout>
+
+
+
+</LinearLayout>

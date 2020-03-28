@@ -8,21 +8,23 @@
 
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/frame"
-        android:background="#ffeee9e2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/cardview_light_background"
         app:rotation_degrees="15.5"
-        tools:context=".MyActivity" />
+        tools:context=".MyActivity"
+        tools:layout_editor_absoluteX="-29dp"
+        tools:layout_editor_absoluteY="-37dp" />
 
     <Button
         android:id="@+id/signOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Out"
         android:onClick="logOutUser"
+        android:text="Sign Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.126"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.926" />
@@ -31,13 +33,27 @@
         android:id="@+id/settinsBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="goToSettings"
         android:text="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.729"
         app:layout_constraintStart_toEndOf="@+id/signOut"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.926"
-        android:onClick="goToSettings"/>
+        app:layout_constraintVertical_bias="0.926" />
+
+    <Button
+        android:id="@+id/matches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Matches"
+        android:onClick="goToMatches"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/frame"
+        app:layout_constraintVertical_bias="0.926" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

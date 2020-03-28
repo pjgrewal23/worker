@@ -20,6 +20,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RegistraionActivity extends AppCompatActivity {
 
     private Button regButton;
@@ -77,8 +80,12 @@ public class RegistraionActivity extends AppCompatActivity {
                         }
                         else{
                             String userId = firebaseAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child ("Users").child(rButton.getText().toString()).child(userId).child("name");
-                            currentUserDb.setValue(name);
+                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child ("Users").child(userId);
+                            Map userInfo = new HashMap();
+                            userInfo.put("name", name);
+                            userInfo.put("userType", rButton.getText().toString());
+                            userInfo.put("profilepicURL", "default");
+                            currentUserDb.setValue(userInfo);
                         }
                     }
                 });

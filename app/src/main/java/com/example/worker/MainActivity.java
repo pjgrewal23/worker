@@ -6,13 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.worker.Cards.arrayAdapter;
+import com.example.worker.Cards.cards;
+import com.example.worker.Matches.Matches;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -29,7 +30,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private cards card_data[];
-    private arrayAdapter arrayAdapter;
+    private com.example.worker.Cards.arrayAdapter arrayAdapter;
 
     private FirebaseAuth firebaseAuth;
 
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
                 cards obj = (cards)dataObject;
                 String uid = obj.getUid();
-                userDb.child(searchType).child(uid).child("connections").child("rejected").child(currentUid).setValue(true);
+                userDb.child(uid).child("connections").child("rejected").child(currentUid).setValue(true);
                 Toast.makeText(MainActivity.this, "LEFT!", Toast.LENGTH_SHORT).show();
             }
 
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             public void onRightCardExit(Object dataObject) {
                 cards obj = (cards)dataObject;
                 String uid = obj.getUid();
-                userDb.child(searchType).child(uid).child("connections").child("approved").child(currentUid).setValue(true);
+                userDb.child(uid).child("connections").child("approved").child(currentUid).setValue(true);
                 isConnectionFormed(uid);
                 Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
             }
@@ -106,14 +107,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void isConnectionFormed(String uid) {
-        DatabaseReference connectionDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userType).child(currentUid).child("connections").child("approved").child(uid);
+        DatabaseReference connectionDb = userDb.child(currentUid).child("connections").child("approved").child(uid);
         connectionDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     Toast.makeText(MainActivity.this, "New Connection", Toast.LENGTH_LONG).show();
-                    FirebaseDatabase.getInstance().getReference().child("Users").child(searchType).child(dataSnapshot.getKey()).child("connections").child("match").child(currentUid).setValue(true);
-                    FirebaseDatabase.getInstance().getReference().child("Users").child(userType).child(currentUid).child("connections").child("match").child(dataSnapshot.getKey()).setValue(true);
+                    userDb.child(dataSnapshot.getKey()).child("connections").child("match").child(currentUid).setValue(true);
+                    userDb.child(currentUid).child("connections").child("match").child(dataSnapshot.getKey()).setValue(true);
 
                 }
             }
@@ -130,27 +131,26 @@ public class MainActivity extends AppCompatActivity {
         
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         
-        DatabaseReference workerDb = FirebaseDatabase.getInstance().getReference().child("Users").child("Worker");
-        workerDb.addChildEventListener(new ChildEventListener() {
+        DatabaseReference db = userDb.child(user.getUid());
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getKey().equals(user.getUid())){
-                    userType = "Worker";
-                    searchType = "Customer";
-                    getSearchTypeUsers();
+                    if (dataSnapshot.exists()){
+                        if(dataSnapshot.child("userType").getValue() != null){
+                            userType = dataSnapshot.child("userType").getValue().toString();
+                            switch (userType){
+                                case "Worker":
+                                    searchType = "Customer";
+                                    break;
+                                case "Customer":
+                                    searchType = "Worker";
+                                    break;
+                            }
+                            getSearchTypeUsers();
+                        }
+                    }
                 }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
             }
 
             @Override
@@ -158,44 +158,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        DatabaseReference customerDb = FirebaseDatabase.getInstance().getReference().child("Users").child("Customer");
-        customerDb.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if(dataSnapshot.getKey().equals(user.getUid())){
-                    userType = "Customer";
-                    searchType = "Worker";
-                    getSearchTypeUsers();
-                }
-            }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
     }
     
     public void getSearchTypeUsers(){
-        DatabaseReference searchTypeUser = FirebaseDatabase.getInstance().getReference().child("Users").child(searchType);
-        searchTypeUser.addChildEventListener(new ChildEventListener() {
+        userDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) { 
-                if(dataSnapshot.exists() && !dataSnapshot.child("connections").child("rejected").hasChild(currentUid) && !dataSnapshot.child("connections").child("approved").hasChild(currentUid)){
+                if(dataSnapshot.exists() && !dataSnapshot.child("connections").child("rejected").hasChild(currentUid) && !dataSnapshot.child("connections").child("approved").hasChild(currentUid) && dataSnapshot.child("userType").getValue().toString().equals(searchType)){
+                    String pictureURL = "default";
 
-                    userList.add(new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString()));
-                    arrayAdapter.notifyDataSetChanged();
+                    if(!dataSnapshot.child("profilepicURL").getValue().equals(pictureURL)){
+                        pictureURL = dataSnapshot.child("profilepicURL").getValue().toString();
+                    }
+                        cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(), pictureURL);
+                        userList.add(item);
+                        arrayAdapter.notifyDataSetChanged();
+
+                    //userList.add(new cards(dataSnapshot.getKey(), dd.child("name").getValue().toString()));
+
+
+
                 }
             }
 
@@ -225,9 +208,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToSettings(View view) {
         Intent intent = new Intent(MainActivity.this, Settings.class);
-        intent.putExtra("userType", userType);
         startActivity(intent);
         finish();
 
+    }
+
+    public void goToMatches(View view) {
+        Intent intent = new Intent(MainActivity.this, Matches.class);
+        startActivity(intent);
+        finish();
     }
 }
