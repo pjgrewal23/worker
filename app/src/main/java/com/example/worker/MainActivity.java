@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 cards obj = (cards)dataObject;
                 String uid = obj.getUid();
                 userDb.child(uid).child("connections").child("rejected").child(currentUid).setValue(true);
-                Toast.makeText(MainActivity.this, "LEFT!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Rejected", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 String uid = obj.getUid();
                 userDb.child(uid).child("connections").child("approved").child(currentUid).setValue(true);
                 isConnectionFormed(uid);
-                Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Approved", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int itemPosition, Object dataObject) {
-                Toast.makeText(MainActivity.this,"CLCIKED!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"CLICKED!", Toast.LENGTH_SHORT).show();
 
             }
         });

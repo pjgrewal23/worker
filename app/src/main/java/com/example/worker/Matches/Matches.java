@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.worker.LoginActivity;
+import com.example.worker.LoginRegistrationActivity;
+import com.example.worker.MainActivity;
 import com.example.worker.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -107,5 +111,12 @@ public class Matches extends AppCompatActivity {
     private ArrayList<matchesObject> resultMatches = new ArrayList<matchesObject>();
     private List<matchesObject> getDataSetMatches() {
         return resultMatches;
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Matches.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
