@@ -84,7 +84,7 @@ public class RegistraionActivity extends AppCompatActivity {
                             Map userInfo = new HashMap();
                             userInfo.put("name", name);
                             userInfo.put("userType", rButton.getText().toString());
-                            userInfo.put("profilepicURL", "default");
+                            userInfo.put("profilepicURL", "https://randomuser.me/api/portraits/med/lego/1.jpg");
                             currentUserDb.setValue(userInfo);
                         }
                     }
@@ -104,5 +104,12 @@ public class RegistraionActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(RegistraionActivity.this, LoginRegistrationActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

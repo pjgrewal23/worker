@@ -200,4 +200,11 @@ public class Settings extends AppCompatActivity {
             profilePicture.setImageURI(resultUri);
         }
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Settings.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

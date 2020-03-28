@@ -36,7 +36,7 @@ public class arrayAdapter extends ArrayAdapter<cards> {
         name.setText(card_item.getName());
         switch (card_item.getProfileImageURL()){
             case "default":
-                Glide.with(getContext()).load("https://randomuser.me/api/portraits/med/lego/1.jpg").into(image);
+                Glide.with(getContext()).load(R.mipmap.ic_launcher_round).into(image);
                 break;
             default:
                 Glide.with(getContext()).load(card_item.getProfileImageURL()).into(image);
