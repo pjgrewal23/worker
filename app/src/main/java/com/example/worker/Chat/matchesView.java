@@ -1,4 +1,4 @@
-package com.example.worker.Matches;
+package com.example.worker.Chat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.worker.Chat.ChatActivity;
 import com.example.worker.R;
 
 public class matchesView extends RecyclerView.ViewHolder implements View.OnClickListener {
