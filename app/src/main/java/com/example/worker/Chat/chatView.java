@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.worker.R;
 
-public class matchesView extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class chatView extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView matchText, matchPhone, matchDes;
     public ImageView mImage;
 
-    public matchesView(View itemView){
+    public chatView(View itemView){
         super(itemView);
 
         itemView.setOnClickListener(this);
@@ -29,10 +29,5 @@ public class matchesView extends RecyclerView.ViewHolder implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(v.getContext(), ChatActivity.class);
-        Bundle b = new Bundle();
-        b.putString("matchText", matchText.getText().toString());
-        intent.putExtras(b);
-        v.getContext().startActivity(intent);
     }
 }
