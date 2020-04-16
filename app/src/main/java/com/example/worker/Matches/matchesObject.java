@@ -3,13 +3,18 @@ package com.example.worker.Matches;
 public class matchesObject {
 
     //uid used for name
-    private String uid, phone, description, profilepicURL;
+    private String user, uid, phone, description, profilepicURL;
 
-    public matchesObject(String uid, String phone, String description, String profile){
+    public matchesObject(String user, String uid, String phone, String description, String profile){
         this.uid = uid;
         this.phone = phone;
         this.description =description;
         this.profilepicURL = profile;
+        this.user = user;
+    }
+
+    public String getUser() {
+        return user;
     }
 
     public String getUid() {

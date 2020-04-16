@@ -115,9 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "New Connection", Toast.LENGTH_LONG).show();
 
                     String key = FirebaseDatabase.getInstance().getReference().child("chat").push().getKey();
-
                     userDb.child(dataSnapshot.getKey()).child("connections").child("match").child(currentUid).child("chatId").setValue(key);
-
                     userDb.child(currentUid).child("connections").child("match").child(dataSnapshot.getKey()).child("chatId").setValue(key);
 
                 }

@@ -19,6 +19,7 @@ public class matchAdapter extends RecyclerView.Adapter<matchesView> {
     private List<matchesObject> matchList;
     private Context context;
 
+
     public matchAdapter(List<matchesObject> matchList, Context context){
         this.matchList = matchList;
         this.context = context;
@@ -29,6 +30,7 @@ public class matchAdapter extends RecyclerView.Adapter<matchesView> {
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_matches,  null, false);
 
         matchesView mvh = new matchesView(layoutView);
+
         return mvh;
     }
 
@@ -37,6 +39,7 @@ public class matchAdapter extends RecyclerView.Adapter<matchesView> {
         holder.matchText.setText(matchList.get(position).getUid());
         holder.matchPhone.setText(matchList.get(position).getPhone());
         holder.matchDes.setText(matchList.get(position).getDescription());
+        holder.user.setText(matchList.get(position).getUser());
         if(!matchList.get(position).getProfilepicURL().equals("default")){
             Glide.with(context).load(matchList.get(position).getProfilepicURL()).into(holder.mImage);
         }

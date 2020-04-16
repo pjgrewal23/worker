@@ -27,6 +27,13 @@
         android:id="@+id/matchId"/>
     <TextView
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Match Name"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:id="@+id/userID"/>
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Match Phone"
         android:paddingBottom="20sp"

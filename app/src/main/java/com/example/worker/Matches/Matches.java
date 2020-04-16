@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.worker.LoginActivity;
 import com.example.worker.LoginRegistrationActivity;
@@ -28,7 +29,7 @@ public class Matches extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private String currentUser;
+    private String currentUser, matchID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,7 @@ public class Matches extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     for(DataSnapshot match: dataSnapshot.getChildren()){
+                        matchID =match.getKey();
                         fetchMatchInfo(match.getKey());
                     }
                 }
@@ -72,17 +74,20 @@ public class Matches extends AppCompatActivity {
     }
 
     private void fetchMatchInfo(String key) {
-        DatabaseReference userDb = FirebaseDatabase.getInstance().getReference().child("Users").child(key);
+        final DatabaseReference userDb = FirebaseDatabase.getInstance().getReference().child("Users").child(key);
         userDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
+                    String uid ="";
                     String name ="";
                     String phone = "";
                     String description = "";
                     String profilepicURL = "";
 
                     if(dataSnapshot.child("name").getValue() != null){
+                        uid = matchID;
+                        Log.i("uid", uid);
                         name = dataSnapshot.child("name").getValue().toString();
                     }
                     if(dataSnapshot.child("phone").getValue() != null){
@@ -95,7 +100,7 @@ public class Matches extends AppCompatActivity {
                         profilepicURL = dataSnapshot.child("profilepicURL").getValue().toString();
                     }
 
-                    matchesObject obj = new matchesObject(name, phone, description, profilepicURL);
+                    matchesObject obj = new matchesObject(uid,name, phone, description, profilepicURL);
                     resultMatches.add(obj);
                     adapter.notifyDataSetChanged();
                 }

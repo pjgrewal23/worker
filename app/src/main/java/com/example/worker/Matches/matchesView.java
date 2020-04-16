@@ -13,7 +13,7 @@ import com.example.worker.R;
 
 public class matchesView extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView matchText, matchPhone, matchDes;
+    public TextView matchText, matchPhone, matchDes, user;
     public ImageView mImage;
 
     public matchesView(View itemView){
@@ -24,7 +24,7 @@ public class matchesView extends RecyclerView.ViewHolder implements View.OnClick
         matchText = itemView.findViewById(R.id.matchId);
         matchPhone = itemView.findViewById(R.id.matchPhone);
         matchDes = itemView.findViewById(R.id.matchDes);
-
+        user = itemView.findViewById(R.id.userID);
         mImage = itemView.findViewById(R.id.matchImage);
     }
 
@@ -32,7 +32,7 @@ public class matchesView extends RecyclerView.ViewHolder implements View.OnClick
     public void onClick(View v) {
         Intent intent = new Intent(v.getContext(), ChatActivity.class);
         Bundle b = new Bundle();
-        b.putString("matchText", matchText.getText().toString());
+        b.putString("matchText", user.getText().toString());
         intent.putExtras(b);
         v.getContext().startActivity(intent);
     }
