@@ -79,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
             public void onRightCardExit(Object dataObject) {
                 cards obj = (cards)dataObject;
                 String uid = obj.getUid();
+//                if(searchType.equals("Customer")){
+//                    customerDbUpdate(uid,currentUid);
+//                }
                 userDb.child(uid).child("connections").child("approved").child(currentUid).setValue(true);
                 isConnectionFormed(uid);
                 Toast.makeText(MainActivity.this, "Approved", Toast.LENGTH_SHORT).show();
@@ -98,6 +101,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(int itemPosition, Object dataObject) {
                 //Toast.makeText(MainActivity.this,"CLICKED!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    private void customerDbUpdate(String uid, String currentUid) {
+        DatabaseReference numDb = userDb.child(uid).child("selectedNum");
+        numDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });

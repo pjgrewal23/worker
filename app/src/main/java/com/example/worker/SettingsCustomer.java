@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -38,14 +40,15 @@ import java.util.Map;
 
 public class SettingsCustomer extends AppCompatActivity {
 
-    private EditText nameText, phoneText, desText;
+    private EditText nameText, phoneText, desText, t1,t2,t3;
     private Button backbtn, confirmBtn;
     private ImageView profilePicture;
-
+    private RadioGroup radioType;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference userDb;
-
-    private String uid, name, phone, description, profilepicURL, userType;
+    private RadioButton rButton;
+    private int selectedTask;
+    private String uid, name, phone, description, profilepicURL, userType, t1s,t2s,t3s;
 
     private Uri resultUri;
 
@@ -57,16 +60,25 @@ public class SettingsCustomer extends AppCompatActivity {
         nameText = findViewById(R.id.name);
         phoneText = findViewById(R.id.phone);
         desText = findViewById(R.id.description);
+        t1 = findViewById(R.id.editText);
+        t2 = findViewById(R.id.editText2);
+        t3 = findViewById(R.id.editText3);
+
 
         profilePicture = findViewById(R.id.profile);
 
         backbtn = findViewById(R.id.back);
         confirmBtn = findViewById(R.id.confirmBtn);
-
+        radioType = findViewById(R.id.radioTask);
 
         firebaseAuth = FirebaseAuth.getInstance();
         uid = firebaseAuth.getCurrentUser().getUid();
         userDb = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+
+
+
+        selectedTask = radioType.getCheckedRadioButtonId();
+        rButton = findViewById(selectedTask);
 
         getUserInfo();
 
@@ -123,6 +135,21 @@ public class SettingsCustomer extends AppCompatActivity {
                         description = map.get("description").toString();
                         desText.setText(description);
                     }
+                    if(map.get("t1") != null){
+                        t1s = map.get("t1").toString();
+                        t1.setText(t1s);
+                    }
+                    if(map.get("t2") != null){
+                        t2s = map.get("t2").toString();
+                        t2.setText(t2s);
+                    }
+                    if(map.get("t3") != null){
+                        t3s = map.get("t3").toString();
+                        t3.setText(t3s);
+                    }
+                    if(map.get("selectedTask") != null){
+                        radioType.check(Integer.parseInt(map.get("selectedTask").toString()));
+                    }
                 }
             }
 
@@ -134,13 +161,70 @@ public class SettingsCustomer extends AppCompatActivity {
     }
 
     private void updateUserInfo() {
+
+        Map userInfo = new HashMap();
+        String key1 = "",k2 = "",k3 ="";
+        if(t1s == null && !t1.getText().toString().isEmpty()){
+            userDb.child("t1Id").setValue(null);
+            key1 = userDb.child("t1Id").push().getKey();
+            userInfo.put("t1Id", key1);
+        }
+        else if(t1s != null && t1s.equals(t1.getText().toString())){
+
+        }
+        else{
+            userDb.child("t1Id").setValue(null);
+            key1 = userDb.child("t1Id").push().getKey();
+            userInfo.put("t1Id", key1);
+        }
+
+
+
+
+        if(t2s == null && !t2.getText().toString().isEmpty()){
+            userDb.child("t2Id").setValue(null);
+            k2 = userDb.child("t2Id").push().getKey();
+            userInfo.put("t2Id", k2);
+        }
+        else if(t2s != null && t2s.equals(t2.getText().toString())){
+
+        }
+        else{
+            userDb.child("t2Id").setValue(null);
+            k2 = userDb.child("t2Id").push().getKey();
+            userInfo.put("t2Id", k2);
+        }
+        if(t3s == null && !t3.getText().toString().isEmpty()){
+            userDb.child("t3Id").setValue(null);
+             k3 = userDb.child("t3Id").push().getKey();
+            userInfo.put("t3Id", k3);
+        }
+        else if( t3s != null && t3s.equals(t3.getText().toString())){
+
+        }
+        else{
+            userDb.child("t3Id").setValue(null);
+            k3 = userDb.child("t3Id").push().getKey();
+            userInfo.put("t3Id", k3);
+        }
+
         name = nameText.getText().toString();
         phone = phoneText.getText().toString();
         description = desText.getText().toString();
-        Map userInfo = new HashMap();
+
         userInfo.put("name", name);
         userInfo.put("phone", phone);
         userInfo.put("description", description);
+        selectedTask = radioType.getCheckedRadioButtonId();
+        rButton = findViewById(selectedTask);
+        userInfo.put("selectedTask", selectedTask);
+        userInfo.put("selectedNum", rButton.getText());
+
+        userInfo.put("t1", t1.getText().toString());
+        userInfo.put("t2", t2.getText().toString());
+        userInfo.put("t3", t3.getText().toString());
+
+
         userDb.updateChildren(userInfo);
 
         if(resultUri != null){
