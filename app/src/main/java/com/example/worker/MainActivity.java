@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import com.example.worker.SettingsCustomer;
 import com.example.worker.Cards.arrayAdapter;
 import com.example.worker.Cards.cards;
 import com.example.worker.Matches.Matches;
@@ -52,11 +52,9 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         userDb = FirebaseDatabase.getInstance().getReference().child("Users");
         userList = new ArrayList<cards>();
-        checkUserType();
-
         currentUid = firebaseAuth.getCurrentUser().getUid();
         arrayAdapter = new arrayAdapter(this, R.layout.item, userList );
-
+        checkUserType();
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
         flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
@@ -209,9 +207,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToSettings(View view) {
-        Intent intent = new Intent(MainActivity.this, Settings.class);
-        startActivity(intent);
+
+        if(!userType.equals("Worker")){
+            Intent intent = new Intent(MainActivity.this, SettingsCustomer.class);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(MainActivity.this, Settings.class);
+            startActivity(intent);
+        }
         finish();
+
 
     }
 

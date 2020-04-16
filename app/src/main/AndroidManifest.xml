@@ -15,6 +15,7 @@
         <activity android:name=".Chat.ChatActivity"></activity>
         <activity android:name=".Matches.Matches" />
         <activity android:name=".Settings" />
+        <activity android:name=".SettingsCustomer" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistraionActivity" />
         <activity android:name=".MainActivity" />

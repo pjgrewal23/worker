@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Matches.Matches">
+    tools:context=".Matches.Matches"
+    android:background="@android:color/black">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
