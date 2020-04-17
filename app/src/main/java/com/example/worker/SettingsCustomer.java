@@ -167,7 +167,7 @@ public class SettingsCustomer extends AppCompatActivity {
         if(t1s == null && !t1.getText().toString().isEmpty()){
             userDb.child("t1Id").setValue(null);
             key1 = FirebaseDatabase.getInstance().getReference().child("task").push().getKey();
-            FirebaseDatabase.getInstance().getReference().child("task").child(key1).child("created").setValue(true);
+            //FirebaseDatabase.getInstance().getReference().child("task").child(key1).child("created").setValue(true);
             userInfo.put("t1Id", key1);
         }
         else if(t1s != null && t1s.equals(t1.getText().toString())){
@@ -176,7 +176,7 @@ public class SettingsCustomer extends AppCompatActivity {
         else{
             userDb.child("t1Id").setValue(null);
             key1 = FirebaseDatabase.getInstance().getReference().child("task").push().getKey();
-            FirebaseDatabase.getInstance().getReference().child("task").child(key1).child("created").setValue(true);
+            //FirebaseDatabase.getInstance().getReference().child("task").child(key1).child("created").setValue(true);
             userInfo.put("t1Id", key1);
         }
 
@@ -186,7 +186,7 @@ public class SettingsCustomer extends AppCompatActivity {
         if(t2s == null && !t2.getText().toString().isEmpty()){
             userDb.child("t2Id").setValue(null);
             k2 = FirebaseDatabase.getInstance().getReference().child("task").push().getKey();
-            FirebaseDatabase.getInstance().getReference().child("task").child(k2).child("created").setValue(true);
+           // FirebaseDatabase.getInstance().getReference().child("task").child(k2).child("created").setValue(true);
             userInfo.put("t2Id", k2);
         }
         else if(t2s != null && t2s.equals(t2.getText().toString())){
@@ -195,13 +195,13 @@ public class SettingsCustomer extends AppCompatActivity {
         else{
             userDb.child("t2Id").setValue(null);
             k2 = FirebaseDatabase.getInstance().getReference().child("task").push().getKey();
-            FirebaseDatabase.getInstance().getReference().child("task").child(k2).child("created").setValue(true);
+            //FirebaseDatabase.getInstance().getReference().child("task").child(k2).child("created").setValue(true);
             userInfo.put("t2Id", k2);
         }
         if(t3s == null && !t3.getText().toString().isEmpty()){
             userDb.child("t3Id").setValue(null);
             k3 = FirebaseDatabase.getInstance().getReference().child("task").push().getKey();
-            FirebaseDatabase.getInstance().getReference().child("task").child(k3).child("created").setValue(true);
+            //FirebaseDatabase.getInstance().getReference().child("task").child(k3).child("created").setValue(true);
             userInfo.put("t3Id", k3);
         }
         else if( t3s != null && t3s.equals(t3.getText().toString())){
@@ -210,7 +210,7 @@ public class SettingsCustomer extends AppCompatActivity {
         else{
             userDb.child("t3Id").setValue(null);
             k3 = FirebaseDatabase.getInstance().getReference().child("task").push().getKey();
-            FirebaseDatabase.getInstance().getReference().child("task").child(k3).child("created").setValue(true);
+            //FirebaseDatabase.getInstance().getReference().child("task").child(k3).child("created").setValue(true);
             userInfo.put("t3Id", k3);
         }
 
@@ -231,7 +231,15 @@ public class SettingsCustomer extends AppCompatActivity {
         userInfo.put("t1", t1.getText().toString());
         userInfo.put("t2", t2.getText().toString());
         userInfo.put("t3", t3.getText().toString());
-
+        if(key1 != null){
+            FirebaseDatabase.getInstance().getReference().child("task").child(key1).child("name").setValue(t1.getText().toString());
+        }
+        if(k2 != null){
+            FirebaseDatabase.getInstance().getReference().child("task").child(k2).child("name").setValue(t2.getText().toString());
+        }
+        if(k3 != null){
+            FirebaseDatabase.getInstance().getReference().child("task").child(k3).child("name").setValue(t3.getText().toString());
+        }
 
         userDb.updateChildren(userInfo);
 
