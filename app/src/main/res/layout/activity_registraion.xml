@@ -5,30 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context=".RegistraionActivity">
 
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        app:srcCompat="@drawable/logotasky" />
 
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="80dp"
         android:ems="10"
+        android:hint="Name"
         android:inputType="textPersonName"
-        android:hint="Name" />
+        android:paddingLeft="60dp" />
 
     <RadioGroup
+        android:id="@+id/radioType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/radioType">
+        android:paddingLeft="60dp">
 
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:text="Worker" />
 
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:text="Customer" />
     </RadioGroup>
 
@@ -36,9 +51,13 @@
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:width="80dp"
         android:ems="10"
+        android:hint="Email"
         android:inputType="textEmailAddress"
+        android:paddingLeft="60dp"
         tools:layout_editor_absoluteX="96dp"
         tools:layout_editor_absoluteY="158dp" />
 
@@ -46,16 +65,23 @@
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:width="120dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:paddingLeft="60dp"
         tools:layout_editor_absoluteX="94dp"
         tools:layout_editor_absoluteY="263dp" />
 
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="100dp"
+        android:width="120dp"
         android:text="Register"
         tools:layout_editor_absoluteX="159dp"
         tools:layout_editor_absoluteY="379dp" />
