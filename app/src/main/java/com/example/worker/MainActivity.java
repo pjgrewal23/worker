@@ -154,105 +154,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void customerDbUpdate() {
 
-        DatabaseReference numDb = userDb.child(currentUid).child("selectedNum");
-        Log.i("HeRE", "");
-        numDb.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Log.i("kefd3", "");
-                if(dataSnapshot.exists()){
-                    select = Integer.parseInt(dataSnapshot.getValue().toString());
-                    getTaskId(select);
-                }
-            }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-//        numDb.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Log.i("kefd3", "");
-//                if(dataSnapshot.exists()){
-//                    select = Integer.parseInt(dataSnapshot.getValue().toString());
-//                    getTaskId(select);
-//                }
-//            }
-//            @Override public void onCancelled(@NonNull DatabaseError databaseError) { }
-//        });
-
-    }
-
-    private void getTaskId(int select) {
-        DatabaseReference numDb;
-        if(select == 1){
-            numDb = userDb.child(otherId).child("t1Id");
-            Log.i("key1", "");
-//            if(yN.equals("y")){
-//                numDb = userDb.child(otherId).child("t1Id");
-//                userDb.child(otherId).child("t1Id").child("connections").child("approved").child(currentUid).setValue(true);
-//            }
-//            else {
-//                numDb = userDb.child(otherId).child("t1Id");
-//                userDb.child(otherId).child("t1Id").child("connections").child("rejected").child(currentUid).setValue(true);
-//            }
-        }
-        else if(select ==2){
-            numDb = userDb.child(otherId).child("t2Id");
-            Log.i("key2", "");
-        }
-        else{
-            numDb = userDb.child(otherId).child("t3Id");
-            Log.i("key3", "");
-        }
-
-        numDb.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    TaskId = dataSnapshot.getValue().toString();
-                    Log.i("key", TaskId);
-                    TaskDb.child(TaskId).child("connections").child("approved").child(currentUid).setValue(true);
-                    isConnectionFormed(TaskId);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-//
-//    private void intoTaskConnection() {
-//        DatabaseReference numDb = TaskDb.child(TaskId).child("connections");
-//        if(yN.equals("y")){
-//            numDb.child("approved").child(currentUid).setValue(true);
-//        }
-//        else{
-//            numDb.child("rejected").child(currentUid).setValue(true);
-//        }
-//    }
+   
 
     private void isConnectionFormed(String uid) {
         DatabaseReference connectionDb;
@@ -412,7 +316,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         custPhotoURL = pictureURL;
 
-                        //custDes = dataSnapshot.child("description").getValue().toString();
                         if(dataSnapshot.child("t1").getValue() != null){
                             t1 = dataSnapshot.child("t1").getValue().toString();
                             Log.i("non", "empty1");
@@ -440,40 +343,7 @@ public class MainActivity extends AppCompatActivity {
                             task1 =  dataSnapshot.child("t1Id").getValue().toString();
                             DatabaseReference t = TaskDb.child(task1);
                             Log.i("t1", t1);
-//                            t.addChildEventListener(new ChildEventListener() {
-//                                @Override
-//                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                                    Log.i("Current", dataSnapshot.child(task1).getKey());
-//                                    if(dataSnapshot.exists() && !dataSnapshot.child("connections").child("approved").hasChild(currentUid) && !dataSnapshot.child("connections").child("rejected").hasChild(currentUid)){
-//                                        Log.i("key2", task1);
-//                                        Log.i("t1", st1);
-//                                        cards item = new cards(forCust, st1, custPhotoURL,task1);
-//                                        userList.add(item);
-//                                        arrayAdapter.notifyDataSetChanged();
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                                }
-//                            });
+
                             t.addListenerForSingleValueEvent(new ValueEventListener() {
 
                                 @Override
@@ -497,37 +367,7 @@ public class MainActivity extends AppCompatActivity {
                             task2 =  dataSnapshot.child("t2Id").getValue().toString();
                             DatabaseReference t = TaskDb.child(task2);
                             final String st2 = t2;
-//                            t.addChildEventListener(new ChildEventListener() {
-//                                @Override
-//                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//                                    if(dataSnapshot.exists() && !dataSnapshot.child("connections").child(task2).child("approved").hasChild(currentUid) && !dataSnapshot.child(task2).child("connections").child("rejected").hasChild(currentUid)  && task2.equals(dataSnapshot.child(task2).getKey())){
 //
-//                                        cards item = new cards(forCust, st2, custPhotoURL,task2);
-//                                        userList.add(item);
-//                                        arrayAdapter.notifyDataSetChanged();
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                                }
-//                            });
                             t.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -550,37 +390,7 @@ public class MainActivity extends AppCompatActivity {
                             task3 =  dataSnapshot.child("t3Id").getValue().toString();
                             DatabaseReference t = TaskDb.child(task3);
                             final String st3 = t3;
-//                            t.addChildEventListener(new ChildEventListener() {
-//                                @Override
-//                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//                                    if(dataSnapshot.exists() && !dataSnapshot.child(task3).child("connections").child("approved").hasChild(currentUid) && !dataSnapshot.child(task3).child("connections").child("rejected").hasChild(currentUid)  && task3.equals(dataSnapshot.child(task3).getKey())){
 //
-//                                        cards item = new cards(forCust, st3, custPhotoURL,task3);
-//                                        userList.add(item);
-//                                        arrayAdapter.notifyDataSetChanged();
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                                }
-//                            });
                             t.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -598,42 +408,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
                         }
-                        //DatabaseReference t = TaskDb.child(TaskId);
 
-//                        t.addChildEventListener(new ChildEventListener() {
-//                            @Override
-//                            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//                                if (dataSnapshot.exists() && !dataSnapshot.child("connections").child("rejected").hasChild(TaskId) && !dataSnapshot.child("connections").child("approved").hasChild(TaskId)) {
-//                                    String pictureURL = "default";
-//                                    if (!dataSnapshot.child("profilepicURL").getValue().equals(pictureURL)) {
-//                                        pictureURL = dataSnapshot.child("profilepicURL").getValue().toString();
-//                                    }
-//                                    cards item = new cards(dataSnapshot.getKey(), custDes, custPhotoURL);
-//                                    userList.add(item);
-//                                    arrayAdapter.notifyDataSetChanged();
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                            }
-//
-//                            @Override
-//                            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//                            }
-//
-//                            @Override
-//                            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                            }
-//                        });
                     }
                 }
                 @Override
