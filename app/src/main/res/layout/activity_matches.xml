@@ -5,8 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Matches.Matches"
-    android:layout_gravity="center"
-    android:background="@android:color/black">
+    android:orientation="vertical"
+    android:background="#22272c"
+    >
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

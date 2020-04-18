@@ -13,7 +13,7 @@ import com.example.worker.R;
 
 public class matchesView extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView matchText, matchPhone, matchDes, user;
+    public TextView matchText, matchPhone, matchDes, user,NoMatch;
     public ImageView mImage;
 
     public matchesView(View itemView){

@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("Right", "dsf");
                 yN = "y";
                 otherId = uid;
-
+                Log.i("Right", uid);
                 if(searchType.equals("Customer")){
                     TaskId = obj.getKey();
                     //customerDbUpdate(uid,currentUid);
@@ -178,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "New Connection", Toast.LENGTH_LONG).show();
 
                     String key = FirebaseDatabase.getInstance().getReference().child("chat").push().getKey();
+                    Log.i("curent",currentUid);
+                    Log.i("other", otherId);
                     userDb.child(otherId).child("connections").child("match").child(currentUid).child("chatId").setValue(key);
                     userDb.child(currentUid).child("connections").child("match").child(otherId).child("chatId").setValue(key);
 
