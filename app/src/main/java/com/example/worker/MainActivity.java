@@ -432,13 +432,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToSettings(View view) {
 
-        if(!userType.equals("Worker")){
-            Intent intent = new Intent(MainActivity.this, SettingsCustomer.class);
-            startActivity(intent);
-        }
-        else if(userType.equals("Worker")) {
+        if(userType == null) {
             Intent intent = new Intent(MainActivity.this, Settings.class);
-            startActivity(intent);
+        } else {
+            if (!userType.equals("Worker")) {
+                Intent intent = new Intent(MainActivity.this, SettingsCustomer.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(MainActivity.this, Settings.class);
+                startActivity(intent);
+            }
         }
         finish();
 
