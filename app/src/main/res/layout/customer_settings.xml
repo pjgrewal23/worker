@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.681"
+        app:layout_constraintVertical_bias="0.824"
         tools:ignore="VectorDrawableCompat" />
 
     <EditText
@@ -106,7 +106,7 @@
         app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <RadioGroup
         android:id="@+id/radioTask"
