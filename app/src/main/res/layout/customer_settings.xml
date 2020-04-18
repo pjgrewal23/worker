@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#22272c "
     tools:context=".Settings">
 
 
@@ -16,32 +17,36 @@
         android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toTopOf="@+id/name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.566"
+        app:layout_constraintVertical_bias="0.681"
         tools:ignore="VectorDrawableCompat" />
 
     <EditText
         android:id="@+id/phone"
-        android:layout_width="298dp"
+        android:layout_width="259dp"
         android:layout_height="44dp"
-        android:layout_marginBottom="428dp"
+        android:layout_marginBottom="424dp"
         android:background="@null"
         android:hint="Phone"
         android:inputType="phone"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFCFC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/name"
-        android:layout_width="298dp"
+        android:layout_width="259dp"
         android:layout_height="44dp"
         android:layout_marginBottom="496dp"
         android:background="@null"
         android:hint="Name"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FBF9F9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.557"
@@ -52,7 +57,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
+        android:background="#19AA74"
         android:text="Confirm"
+        android:textColor="#FBF9F9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/back"
         app:layout_constraintHorizontal_bias="0.37"
@@ -63,7 +70,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
+        android:background="#19AA74"
         android:text="Back"
+        android:textColor="#FDFDFD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.82"
@@ -71,12 +80,14 @@
 
     <EditText
         android:id="@+id/description"
-        android:layout_width="289dp"
+        android:layout_width="259dp"
         android:layout_height="124dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Description"
         android:inputType="textMultiLine"
+        android:textColor="#FFFCFC"
+        android:textColorHint="#FAF9F9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.54"
@@ -86,13 +97,16 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="32dp"
         android:text="Customer Settings"
+        android:textColor="#F6F4F4"
         app:layout_constraintBottom_toTopOf="@+id/profile"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.533" />
 
     <RadioGroup
         android:id="@+id/radioTask"
@@ -107,26 +121,26 @@
 
         <RadioButton
             android:id="@+id/radioButton"
-            android:paddingTop="1mm"
-            android:text="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingTop="1mm"
+            android:text="1" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="2mm"
-            android:text="2"
+            android:paddingBottom="2mm"
 
-            android:paddingBottom="2mm" />
+            android:text="2" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="wrap_content"
-            android:text="3"
+            android:layout_height="wrap_content"
 
-            android:layout_height="wrap_content" />
+            android:text="3" />
 
     </RadioGroup>
 
@@ -135,8 +149,10 @@
         android:layout_width="259dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Task 1"
+        android:inputType="textPersonName"
+        android:textColor="#FDFDFD"
+        android:textColorHint="#F6F5F5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -149,8 +165,10 @@
         android:layout_width="259dp"
         android:layout_height="41dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Task 2"
+        android:inputType="textPersonName"
+        android:textColor="#F4F3F3"
+        android:textColorHint="#FDFCFC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
@@ -165,6 +183,8 @@
         android:ems="10"
         android:hint="Task 3"
         android:inputType="textPersonName"
+        android:textColor="#F8F5F5"
+        android:textColorHint="#FAF8F8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.532"
