@@ -13,13 +13,14 @@
         android:background="#22272c "
         app:rotation_degrees="15.5"
         tools:context=".MyActivity"
-        tools:layout_editor_absoluteX="-29dp"
-        tools:layout_editor_absoluteY="-37dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/signOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#19AA74"
         android:onClick="logOutUser"
         android:text="Sign Out"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,6 +34,7 @@
         android:id="@+id/settinsBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#19AA74"
         android:onClick="goToSettings"
         android:text="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,8 +48,9 @@
         android:id="@+id/matches"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Matches"
+        android:background="#19AA74"
         android:onClick="goToMatches"
+        android:text="Matches"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
