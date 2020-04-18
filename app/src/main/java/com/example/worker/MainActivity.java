@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-   
+
 
     private void isConnectionFormed(String uid) {
         DatabaseReference connectionDb;
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
     public void checkUserType(){
         
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        
+
         DatabaseReference db = userDb.child(user.getUid());
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -436,7 +436,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SettingsCustomer.class);
             startActivity(intent);
         }
-        else {
+        else if(userType.equals("Worker")) {
             Intent intent = new Intent(MainActivity.this, Settings.class);
             startActivity(intent);
         }
